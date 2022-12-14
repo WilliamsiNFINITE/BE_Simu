@@ -146,7 +146,7 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 	}
 
 	//permet de savoir s'il reste un �v�nement encore � traiter
-	private boolean hasANextEvent() {
+	public boolean hasANextEvent() { //TODO: remake private
 		if(echeancier.size()>0) {
 			if(echeancier.first().getDateOccurence().compareTo(end)<=0) return true;
 		}
