@@ -34,6 +34,8 @@ public class Tour extends EntiteSimulee {
         return null;
     }
 
+    @Override
+    public void activate() {
 
-
+    }
 }
