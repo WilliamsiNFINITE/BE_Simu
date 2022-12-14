@@ -21,14 +21,21 @@ public class ScenarioAeroport extends Scenario {
             });
         }
 
-        Post(new CreerAvion(getEngine().SimulationDate().add(LogicalDuration.ofMinutes(8)), "Avion"));
+        Post(new CreerAvion(getEngine().SimulationDate().add(LogicalDuration.ofMinutes(5)), "Avion"));
     }
 
     public int getNbAvions() {
         return nbAvions;
     }
 
+    @Override
+    public void activate() {
+        for(EntiteSimulee e: getEntites()) {
+            if(!(e instanceof Scenario))
+                e.activate();
+        }
 
+    }
 
     private static class CreerAvion extends SimEvent {
 

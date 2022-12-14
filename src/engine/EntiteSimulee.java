@@ -57,7 +57,11 @@ public abstract class EntiteSimulee {
 	public List<EntiteSimulee> recherche(Predicate<EntiteSimulee> query) {
 		return engine.recherche(query);
 	}
-	
+
+	public List<EntiteSimulee> getEntites() {
+		return engine.mesEntitesSimulees;
+	}
+
 	public MoreRandom getRandomGenerator() {
 		return engine.getRandomGenerator();
 	}
