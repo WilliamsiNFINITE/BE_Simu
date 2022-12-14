@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/Travail/Annee_3/Simulation/BE/TD_1_base_common/dependencies/poi/poi-4.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../Travail/Annee_3/Simulation/BE/TD_1_base_common/dependencies/poi/poi-4.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/Travail/Annee_3/Simulation/BE/TD_1_base_common/dependencies/poi/poi-ooxml-4.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../Travail/Annee_3/Simulation/BE/TD_1_base_common/dependencies/poi/poi-ooxml-4.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
