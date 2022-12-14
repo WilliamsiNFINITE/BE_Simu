@@ -45,8 +45,6 @@ public class Avion extends EntiteSimulee {
     @Override
     protected void init() {
         super.init();
-        System.out.println("Constructeur Atterissage");
-        Post(new Atterissage(LogicalDateTime.Now(), this));
     }
 
     public void DemandeAtterrissage(Tour tour) {
@@ -76,11 +74,13 @@ public class Avion extends EntiteSimulee {
     public void FinAtterrissage(Tour tour) {
 
         // TODO Auto-generated method stub
+        // Mettre la piste en libre
 
     }
 
     public void FinDecollage(Tour tour) {
         // TODO Auto-generated method stub
+        // Mettre la piste en libre
 
     }
 

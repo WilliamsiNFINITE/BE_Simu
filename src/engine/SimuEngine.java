@@ -150,15 +150,10 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 	//permet de savoir s'il reste un �v�nement encore � traiter
 	public boolean hasANextEvent() { //TODO: remake private
 		if(echeancier.size()>0) {
-			System.out.println("HasNextEvent (SimuEngine)");
 			if(echeancier.first().getDateOccurence().compareTo(end)<=0){
-				System.out.println("HasNextEvent Pass (SimuEngine)");
 				return true;
 			}
-			System.out.println(echeancier.first().getDateOccurence());
-			System.out.println(end);
 		}
-		System.out.println("Has NOOOOO NextEvent (SimuEngine)");
 
 		return false;
 	}

@@ -29,7 +29,6 @@ public class ScenarioAeroport extends Scenario {
             if(!(e instanceof Scenario))
                 e.activate();
         }
-
     }
 
 
@@ -40,7 +39,7 @@ public class ScenarioAeroport extends Scenario {
             new Avion(getEngine(), new InitDataAvion("Avion " + i)).requestInit();
 
         }
-        Post(new CreerAvion(getEngine(),this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(5)), "Avion"));
+//        Post(new CreerAvion(getEngine(),this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(5)), "Avion"));
 
 
     }
