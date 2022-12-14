@@ -37,6 +37,10 @@ public abstract class EntiteSimulee {
 	public String getName() {
 		return ini.getName();
 	}
+
+	public void setName(String name) {
+		ini.setName(name);
+	}
 	public InitData getInit() {
 		return ini;
 	}

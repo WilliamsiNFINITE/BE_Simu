@@ -6,33 +6,60 @@ import engine.SimuEngine;
 
 public class Avion extends EntiteSimulee {
 
-    String name;
+    //Attributs
     String compagnie;
     String pays;
 
-
+    //Constructeur
     public Avion(SimuEngine engine, InitData ini) {
         super(engine, ini);
     }
 
-    public void setName(String name) {
-        this.name = name;
+
+
+    //Getter
+    public String getCompagnie() {
+        return compagnie;
     }
     @Override
     public String getName() {
         return super.getName();
     }
+    public String getPays() {
+        return pays;
+    }
+
+    //Setter
     public void setCompagnie(String compagnie) {
         this.compagnie = compagnie;
     }
-    public String getCompagnie() {
-        return compagnie;
+    public void setName(String name) {
+        super.setName(name);
     }
     public void setPays(String pays) {
         this.pays = pays;
     }
-    public String getPays() {
-        return pays;
+
+    //Méthodes
+    public void DemandeAtterrissage() {
+        // TODO Auto-generated method stub
+
     }
+
+    public void DemandeDecollage() {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void FinAtterrissage() {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void FinDecollage() {
+        // TODO Auto-generated method stub
+
+    }
+
 
 }
