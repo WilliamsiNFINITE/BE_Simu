@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import aeroport.Gate;
+import aeroport.Piste;
+import aeroport.TaxiWay;
 import enstabretagne.base.logger.Logger;
 import enstabretagne.base.math.MoreRandom;
 import enstabretagne.base.time.LogicalDateTime;
@@ -171,5 +174,15 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 	@Override
 	public LogicalDateTime SimulationDate() {
 		return currentDate;
+	}
+
+	public Piste getPiste() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public TaxiWay getEnteringTaxiway() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
