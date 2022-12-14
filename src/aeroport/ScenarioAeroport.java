@@ -2,9 +2,9 @@ package aeroport;
 
 import engine.ScenarioInitData;
 import engine.SimuEngine;
-
-public class Scenario extends engine.Scenario {
-    public Scenario(SimuEngine engine, ScenarioInitData init) {
+// comment
+public class ScenarioAeroport extends engine.Scenario {
+    public ScenarioAeroport(SimuEngine engine, ScenarioInitData init) {
         super(engine, init);
     }
 
