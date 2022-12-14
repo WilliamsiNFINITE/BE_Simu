@@ -12,5 +12,5 @@ public class Aeroport {
     LogicalDateTime end = new LogicalDateTime("14/01/2022 19:00");
 
     PlanAeroport planAeroport = new PlanAeroport(engine, 1, start, end);
-    planAeroport.initScenario()
+
 }
