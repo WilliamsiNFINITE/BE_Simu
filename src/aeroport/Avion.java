@@ -48,6 +48,15 @@ public class Avion extends EntiteSimulee {
         tour.AutorisationDecollage(this);
     }
 
+    public void DemandeRoulageEntrant(Tour tour) {
+        tour.AutorisationRoulageEntrant(this);
+    }
+
+    public void DemandeRoulageSortant(Tour tour) {
+        tour.AutorisationRoulageSortant(this);
+    }
+
+
     public void FinAtterrissage(Tour tour) {
 
         // TODO Auto-generated method stub

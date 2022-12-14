@@ -185,4 +185,11 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public TaxiWay getLeavingTaxiway() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
