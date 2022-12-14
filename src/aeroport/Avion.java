@@ -15,8 +15,6 @@ public class Avion extends EntiteSimulee {
         super(engine, ini);
     }
 
-
-
     //Getter
     public String getCompagnie() {
         return compagnie;
@@ -41,22 +39,24 @@ public class Avion extends EntiteSimulee {
     }
 
     //Méthodes
-    public void DemandeAtterrissage() {
+    public void DemandeAtterrissage(Tour tour) {
+
+
         // TODO Auto-generated method stub
 
     }
 
-    public void DemandeDecollage() {
+    public void DemandeDecollage(Tour tour) {
         // TODO Auto-generated method stub
 
     }
 
-    public void FinAtterrissage() {
+    public void FinAtterrissage(Tour tour) {
         // TODO Auto-generated method stub
 
     }
 
-    public void FinDecollage() {
+    public void FinDecollage(Tour tour) {
         // TODO Auto-generated method stub
 
     }
