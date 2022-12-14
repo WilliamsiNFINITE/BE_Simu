@@ -48,6 +48,7 @@ public class ScenarioAeroport extends Scenario {
         public void process() {
             Avion av = new Avion(entitePorteuseEvenement.getEngine(), new InitData(name) {
             });
+            av.activate();
         }
 
     }
