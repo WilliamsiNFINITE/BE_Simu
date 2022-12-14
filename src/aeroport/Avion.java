@@ -14,7 +14,7 @@ public class Avion extends EntiteSimulee {
     //Constructeur
     public Avion(SimuEngine engine, InitData ini) {
         super(engine, ini);
-        Atterissage atterissage = new Atterissage(LogicalDateTime.Now(), this);
+//        Post(new Atterissage(LogicalDateTime.Now(), this));
     }
 
     //Getter
