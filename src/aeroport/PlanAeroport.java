@@ -21,7 +21,7 @@ public class PlanAeroport extends Plan {
     @Override
     public void initScenario() {
         for(int i = 0;i < getNbReplique(); i++)
-            scenarioAeroports.add(new ScenarioAeroport(this.getEngine(), new ScenarioInitData("Scenario 1 ", i, debut, fin), 2, 1, 1, 1));
+            scenarioAeroports.add(new ScenarioAeroport(this.getEngine(), new ScenarioInitData(String.format("Scenario %s", i), i, debut, fin), 2, 1, 1, 1));
     }
 
     @Override

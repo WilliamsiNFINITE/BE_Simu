@@ -1,6 +1,8 @@
 package aeroport;
 
 import engine.*;
+import enstabretagne.base.logger.Logger;
+import enstabretagne.base.math.MoreRandom;
 import enstabretagne.base.time.LogicalDateTime;
 import enstabretagne.base.time.LogicalDuration;
 
@@ -44,12 +46,21 @@ public class ScenarioAeroport extends Scenario {
         new Piste(getEngine(), new InitDataPiste("Piste")).requestInit();
         new TaxiWay(getEngine(), new InitDataTaxiWay("Taxiway 1"), "Entrant").requestInit();
         new TaxiWay(getEngine(), new InitDataTaxiWay("Taxiway 2"), "Sortant").requestInit();
-        for(int i = 0; i<this.nbAvions; i++) {
-            new Avion(getEngine(), new InitDataAvion("Avion " + i)).requestInit();
-        }
+//        for(int i = 0; i<this.nbAvions; i++) {
+//            new Avion(getEngine(), new InitDataAvion("Avion " + i)).requestInit();
+//        }
 //        Post(new CreerAvion(getEngine(),this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(5)), "Avion"));
 
+        scenarioTest();
+    }
 
+
+    public void scenarioTest() {
+        //arrivee d'un avion
+        Post(new CreerAvion(getEngine(),this.getEngine().SimulationDate(), "Avion"));
+//        //decollage de l'avion
+//        Post(new Decollage(getEngine().SimulationDate(),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
+//        Post(new Atterissage(getEngine().SimulationDate(),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
     }
 
     private static class CreerAvion extends SimEvent {
@@ -64,6 +75,8 @@ public class ScenarioAeroport extends Scenario {
         @Override
         public void process() {
             new Avion(engine, new InitDataAvion(name)).requestInit();
+            MoreRandom moreRandom = new MoreRandom();
+            Logger.Detail(null, "main", String.valueOf(moreRandom.nextGaussian()));
         }
     }
 
