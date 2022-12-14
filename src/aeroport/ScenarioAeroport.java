@@ -20,8 +20,8 @@ public class ScenarioAeroport extends Scenario {
             new Avion(getEngine(), new InitData("Avion " + i) {
             });
         }
-
-        Post(new CreerAvion(getEngine().SimulationDate().add(LogicalDuration.ofMinutes(5)), "Avion"));
+        System.out.println("Simulation date: " + getEngine().SimulationDate());
+        Post(new CreerAvion(this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(5)), "Avion"));
     }
 
     public int getNbAvions() {

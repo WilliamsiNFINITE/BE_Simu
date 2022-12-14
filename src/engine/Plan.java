@@ -22,8 +22,9 @@ public abstract class Plan {
 		return currentRepliqueNumber;
 	}
 	
-	public Plan(int nbReplique) {
+	public Plan(SimuEngine engine, int nbReplique) {
 		this.nbReplique=nbReplique;
+		this.engine=engine;
 	}
 	//cette m�thode permet de d�finir chaque sc�nario � ex�cuter
 	//elle pr�suppose que votre impl�mentation saura stocker la d�finition de chaque sc�nario

@@ -13,6 +13,8 @@ public class Aeroport {
         LogicalDateTime start = new LogicalDateTime("14/12/2022 10:00");
         LogicalDateTime end = new LogicalDateTime("14/01/2022 19:00");
 
+        engine.initSimulation(start, end);
+
         PlanAeroport planAeroport = new PlanAeroport(engine, 1, start, end);
 
         planAeroport.initScenario();
@@ -20,7 +22,7 @@ public class Aeroport {
         while(planAeroport.hasNextScenario())
         {
             planAeroport.nextScenario().creerEntitesSimulees();
-            engine.initSimulation(start, end);
+            engine.initSimulation();
             engine.simulate();
             engine.terminate(engine.hasANextEvent());
         }

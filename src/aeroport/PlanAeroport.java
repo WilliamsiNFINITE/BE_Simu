@@ -12,7 +12,7 @@ public class PlanAeroport extends Plan {
     LinkedList<ScenarioAeroport> scenarioAeroports;
 
     public PlanAeroport(SimuEngine engine, int nbReplique, LogicalDateTime debut, LogicalDateTime fin) {
-        super(nbReplique);
+        super(engine, nbReplique);
         scenarioAeroports = new LinkedList<>();
         this.debut = debut;
         this.fin = fin;
@@ -30,8 +30,8 @@ public class PlanAeroport extends Plan {
     }
 
     @Override
-    public Scenario nextScenario() {
-        Scenario sc = scenarioAeroports.pop();
+    public ScenarioAeroport nextScenario() {
+        ScenarioAeroport sc = scenarioAeroports.pop();
         engine.setCurrentScenario(sc);
         return sc;
     }
