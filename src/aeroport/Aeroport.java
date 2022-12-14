@@ -3,6 +3,7 @@ package aeroport;
 import engine.*;
 import engine.SimuEngine;
 import enstabretagne.base.logger.Logger;
+import enstabretagne.base.math.MoreRandom;
 import enstabretagne.base.time.LogicalDateTime;
 
 public class Aeroport {
@@ -11,7 +12,7 @@ public class Aeroport {
         SimuEngine engine = new SimuEngine();
 
         LogicalDateTime start = new LogicalDateTime("14/12/2022 10:00");
-        LogicalDateTime end = new LogicalDateTime("14/01/2022 19:00");
+        LogicalDateTime end = new LogicalDateTime("14/12/2022 19:00");
 
         engine.initSimulation(start, end);
 
@@ -26,7 +27,8 @@ public class Aeroport {
             engine.simulate();
             engine.terminate(engine.hasANextEvent());
         }
-
+        MoreRandom moreRandom = new MoreRandom();
+//        Logger.Detail(null, "main", String.valueOf(moreRandom.nextGaussian()));
         Logger.Terminate();
     }
 }

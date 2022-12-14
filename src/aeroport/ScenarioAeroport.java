@@ -16,12 +16,7 @@ public class ScenarioAeroport extends Scenario {
 
     @Override
     public void creerEntitesSimulees() {
-        for(int i = 0; i<this.nbAvions; i++) {
-            new Avion(getEngine(), new InitData("Avion " + i) {
-            });
-        }
-        System.out.println("Simulation date: " + getEngine().SimulationDate());
-        Post(new CreerAvion(this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(5)), "Avion"));
+        System.out.println("Création des entités simulées (ScenarioAeroport)");
     }
 
     public int getNbAvions() {
@@ -37,20 +32,36 @@ public class ScenarioAeroport extends Scenario {
 
     }
 
+
+    @Override
+    public void init() {
+        super.init();
+        for(int i = 0; i<this.nbAvions; i++) {
+            new Avion(getEngine(), new InitDataAvion("Avion " + i)).requestInit();
+
+        }
+        Post(new CreerAvion(getEngine(),this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(5)), "Avion"));
+
+
+    }
+
     private static class CreerAvion extends SimEvent {
 
         String name;
-        public CreerAvion(LogicalDateTime d, String nom) {
+        SimuEngine engine;
+        public CreerAvion(SimuEngine engine, LogicalDateTime d, String nom) {
             super(d);
             this.name = nom;
+            this.engine = engine;
         }
         @Override
         public void process() {
-            Avion av = new Avion(entitePorteuseEvenement.getEngine(), new InitData(name) {
-            });
-            av.activate();
+            new Avion(engine, new InitDataAvion(name)).requestInit();
         }
-
     }
+
+
+
+
 }
 

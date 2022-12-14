@@ -40,9 +40,19 @@ public class Avion extends EntiteSimulee {
     }
 
     //Méthodes
+
+
+    @Override
+    protected void init() {
+        super.init();
+        System.out.println("Constructeur Atterissage");
+        Post(new Atterissage(LogicalDateTime.Now(), this));
+    }
+
     public void DemandeAtterrissage(Tour tour) {
         if (tour.AutorisationAtterrissage(this)){
             Post(new Atterissage(LogicalDateTime.Now(), this));
+            Atterissage atterissage = new Atterissage(LogicalDateTime.Now(), this);
             // L'avion atterit
         } else {
             // L'avion ne peut pas atterir

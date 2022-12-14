@@ -75,7 +75,7 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 		for(EntiteSimulee e:mesEntitesSimulees)
 			e.requestInit();
 	}
-	
+
 	//initialisation de la simulation sans param�tres de d�but et fin
 	//Le d�but et fin viennent du sc�nario
 	public void initSimulation() {
@@ -96,11 +96,13 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 	//boucle de simulation
 	public void simulate()
 	{
+		System.out.println("Simulating start (SimuEngine)");
 		//simple parcours de l'�ch�ancier
 		while(hasANextEvent())
 		{
 			//on prend le premier �v�nement suivant de l'�ch�ancier
 			SimEvent ev = echeancier.first();
+			System.out.println("ev name (SimuEngine) : "+ev.entitePorteuseEvenement.getName());
 			//on l'enl�ve de l'�ch�ancier
 			echeancier.remove(ev);
 			
@@ -148,8 +150,16 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 	//permet de savoir s'il reste un �v�nement encore � traiter
 	public boolean hasANextEvent() { //TODO: remake private
 		if(echeancier.size()>0) {
-			if(echeancier.first().getDateOccurence().compareTo(end)<=0) return true;
+			System.out.println("HasNextEvent (SimuEngine)");
+			if(echeancier.first().getDateOccurence().compareTo(end)<=0){
+				System.out.println("HasNextEvent Pass (SimuEngine)");
+				return true;
+			}
+			System.out.println(echeancier.first().getDateOccurence());
+			System.out.println(end);
 		}
+		System.out.println("Has NOOOOO NextEvent (SimuEngine)");
+
 		return false;
 	}
 
