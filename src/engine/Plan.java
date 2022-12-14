@@ -27,7 +27,7 @@ public abstract class Plan {
 	}
 	//cette m�thode permet de d�finir chaque sc�nario � ex�cuter
 	//elle pr�suppose que votre impl�mentation saura stocker la d�finition de chaque sc�nario
-	public abstract void initScenarii();
+	public abstract void initScenario();
 	
 	//cette m�thode permet de savoir s'il y a encore un sc�nario � ex�cuter
 	public abstract boolean hasNextScenario();
