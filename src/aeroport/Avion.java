@@ -59,5 +59,8 @@ public class Avion extends EntiteSimulee {
 
     }
 
+    @Override
+    public void activate() {
 
+    }
 }

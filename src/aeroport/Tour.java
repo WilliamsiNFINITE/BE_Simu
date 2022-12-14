@@ -57,4 +57,8 @@ public class Tour extends EntiteSimulee {
         }
     }
 
+    @Override
+    public void activate() {
+
+    }
 }

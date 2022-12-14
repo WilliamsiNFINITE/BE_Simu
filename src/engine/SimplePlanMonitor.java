@@ -22,7 +22,7 @@ public class SimplePlanMonitor {
 	//m�thode principale simple
 	public void run() {
 		//1. on cr�e les sc�narii
-		plan.initScenarii();
+		plan.initScenario();
 		Logger.Information(this, "main", "D�but du plan d'exp�rience");
 
 		//on boucle sur les sc�narios
