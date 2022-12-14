@@ -3,6 +3,7 @@ package aeroport;
 import engine.EntiteSimulee;
 import engine.InitData;
 import engine.SimuEngine;
+import enstabretagne.base.time.LogicalDateTime;
 
 public class Avion extends EntiteSimulee {
 
@@ -40,7 +41,12 @@ public class Avion extends EntiteSimulee {
 
     //Méthodes
     public void DemandeAtterrissage(Tour tour) {
-        tour.AutorisationAtterrissage(this);
+        if (tour.AutorisationAtterrissage(this)){
+            Post(new Atterissage(LogicalDateTime.Now(), this));
+            // L'avion atterit
+        } else {
+            // L'avion ne peut pas atterir
+        }
 
     }
 
