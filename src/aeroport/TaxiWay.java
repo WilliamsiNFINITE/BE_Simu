@@ -1,6 +1,29 @@
 package aeroport;
 
-public class TaxiWay {
+import engine.EntiteSimulee;
+import engine.SimuEngine;
+
+public class TaxiWay extends EntiteSimulee {
+    SimuEngine engine;
+    String nomTaxiWay;
+    Boolean occupe;
+    String direction;
+
+    //Constructeur
+    public TaxiWay(SimuEngine engine, InitDataTaxiWay ini, String direction) {
+        super(engine, ini);
+        this.engine = engine;
+        this.direction = direction;
+    }
+
+    public boolean getOccupe() {
+        return occupe;
+    }
+
+    public void setOccupe(boolean b) {
+        occupe = b;
+    }
+
     public boolean getOccupeEntrant() {
         // TODO Auto-generated method stub
         return false;
@@ -19,5 +42,15 @@ public class TaxiWay {
     public void setOccupeSortant(boolean b) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void activate() {
+        // TODO Auto-generated method stub
+
+    }
+
+    public String getDirection() {
+        return direction;
     }
 }

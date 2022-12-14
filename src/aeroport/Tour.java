@@ -24,7 +24,7 @@ public class Tour extends EntiteSimulee {
 
     //Méthodes
 
-    public Boolean AutorisationAtterrissage(Avion avion) {
+    public Boolean AutorisationAccesPiste(Avion avion) {
         // Attribution d'un numero de vol à l'avion de la forme F + entier aléatoire de 00 à 99
         avion.setName("F" + (int) (Math.random() * 100));
         // Verifie si la piste est libre pour l'atterrissage
@@ -38,24 +38,11 @@ public class Tour extends EntiteSimulee {
         }
     }
 
-    public Boolean AutorisationDecollage(Avion avion) {
-        avion.setName("F" + (int) (Math.random() * 100));
-        // Verifie si la piste est libre pour le décollage
-        if (!this.getEngine().getPiste().getOccupe()) {
-            // Si la piste est libre, l'avion decolle
-            this.getEngine().getPiste().setOccupe(true);
-            return true;
-        } else {
-            // Si la piste est occupée, l'avion ne peut pas atterir
-            return false;
-        }
-    }
-
-    public Boolean AutorisationRoulageEntrant(Avion avion) {
+    public Boolean AutorisationRoulage(Avion avion, String action) {
         // Verifie si le taxiway est libre pour le roulement de l'avion
-        if (!this.getEngine().getEnteringTaxiway().getOccupeEntrant()) {
+        if (!this.getEngine().getEnteringTaxiway().getOccupe()) {
             // Si le taxiway est libre, l'avion roule
-            this.getEngine().getEnteringTaxiway().setOccupeEntrant(true);
+            this.getEngine().getEnteringTaxiway().setOccupe(true);
             return true;
         } else {
             // Si le taxiway est occupé, l'avion ne peut pas rouler
@@ -63,17 +50,6 @@ public class Tour extends EntiteSimulee {
         }
     }
 
-    public Boolean AutorisationRoulageSortant(Avion avion) {
-        // Verifie si le taxiway est libre pour le roulement de l'avion
-        if (!this.getEngine().getLeavingTaxiway().getOccupeSortant()) {
-            // Si le taxiway est libre, l'avion roule
-            this.getEngine().getLeavingTaxiway().setOccupeSortant(true);
-            return true;
-        } else {
-            // Si le taxiway est occupé, l'avion ne peut pas rouler
-            return false;
-        }
-    }
 
     @Override
     public void activate() {

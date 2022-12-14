@@ -96,13 +96,12 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 	//boucle de simulation
 	public void simulate()
 	{
-		System.out.println("Simulating start (SimuEngine)");
 		//simple parcours de l'�ch�ancier
 		while(hasANextEvent())
 		{
 			//on prend le premier �v�nement suivant de l'�ch�ancier
 			SimEvent ev = echeancier.first();
-			System.out.println("ev name (SimuEngine) : "+ev.entitePorteuseEvenement.getName());
+			System.out.println("event name (SimuEngine) : "+ev.entitePorteuseEvenement.getName());
 			//on l'enl�ve de l'�ch�ancier
 			echeancier.remove(ev);
 			
@@ -182,16 +181,36 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 	}
 
 	public Piste getPiste() {
-		// TODO Auto-generated method stub
+		for (EntiteSimulee e : mesEntitesSimulees) {
+			if (e instanceof Piste) {
+				return (Piste) e;
+			}
+		}
 		return null;
 	}
 
 	public TaxiWay getEnteringTaxiway() {
+		for (EntiteSimulee es : mesEntitesSimulees) {
+			if (es instanceof TaxiWay) {
+				TaxiWay tw = (TaxiWay) es;
+				if (tw.getDirection().equals("Entrant")) {
+					return tw;
+				}
+			}
+		}
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public TaxiWay getLeavingTaxiway() {
+		for (EntiteSimulee es : mesEntitesSimulees) {
+			if (es instanceof TaxiWay) {
+				TaxiWay tw = (TaxiWay) es;
+				if (tw.getDirection().equals("Sortant")) {
+					return tw;
+				}
+			}
+		}
 		// TODO Auto-generated method stub
 		return null;
 	}

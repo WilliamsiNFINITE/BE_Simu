@@ -8,10 +8,16 @@ import enstabretagne.base.time.LogicalDuration;
 public class ScenarioAeroport extends Scenario {
 
     int nbAvions;
+    int nbPiste;
+    int nbTaxiwayEntrant;
+    int nbTaxiwaySortant;
 
-    public ScenarioAeroport(SimuEngine engine, ScenarioInitData init, int nbAvions) {
+    public ScenarioAeroport(SimuEngine engine, ScenarioInitData init, int nbAvions, int nbPiste, int nbTaxiwayEntrant, int nbTaxiwaySortant) {
         super(engine, init);
         this.nbAvions = nbAvions;
+        this.nbPiste = nbPiste;
+        this.nbTaxiwayEntrant = nbTaxiwayEntrant;
+        this.nbTaxiwaySortant = nbTaxiwaySortant;
     }
 
     @Override
@@ -35,9 +41,11 @@ public class ScenarioAeroport extends Scenario {
     @Override
     public void init() {
         super.init();
+        new Piste(getEngine(), new InitDataPiste("Piste")).requestInit();
+        new TaxiWay(getEngine(), new InitDataTaxiWay("Taxiway 1"), "Entrant").requestInit();
+        new TaxiWay(getEngine(), new InitDataTaxiWay("Taxiway 2"), "Sortant").requestInit();
         for(int i = 0; i<this.nbAvions; i++) {
             new Avion(getEngine(), new InitDataAvion("Avion " + i)).requestInit();
-
         }
 //        Post(new CreerAvion(getEngine(),this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(5)), "Avion"));
 

@@ -1,16 +1,22 @@
 package aeroport;
 
-public class Piste {
+import engine.EntiteSimulee;
+import engine.InitData;
+import engine.SimuEngine;
+
+public class Piste extends EntiteSimulee
+{
 
     //Attributs
     String nomPiste;
     Aeroport aeroport;
     Boolean occupe;
 
+    SimuEngine engine;
+
     //Constructeur
-    public Piste(String nomPiste, Aeroport aeroport) {
-        this.nomPiste = nomPiste;
-        this.aeroport = aeroport;
+    public Piste(SimuEngine engine, InitDataPiste ini){
+        super(engine, ini);
         this.occupe = false;
     }
 
@@ -36,6 +42,11 @@ public class Piste {
     }
     public void setOccupe(Boolean occupe) {
         this.occupe = occupe;
+    }
+
+    @Override
+    public void activate() {
+
     }
 
 

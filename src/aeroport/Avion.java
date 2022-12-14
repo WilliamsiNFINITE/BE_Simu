@@ -14,6 +14,7 @@ public class Avion extends EntiteSimulee {
     //Constructeur
     public Avion(SimuEngine engine, InitData ini) {
         super(engine, ini);
+        Atterissage atterissage = new Atterissage(LogicalDateTime.Now(), this);
     }
 
     //Getter
@@ -47,41 +48,38 @@ public class Avion extends EntiteSimulee {
         super.init();
     }
 
-    public void DemandeAtterrissage(Tour tour) {
-        if (tour.AutorisationAtterrissage(this)){
+    public void DemandeAccesPiste(Tour tour) {
+        if (tour.AutorisationAccesPiste(this)){
             Post(new Atterissage(LogicalDateTime.Now(), this));
-            Atterissage atterissage = new Atterissage(LogicalDateTime.Now(), this);
+//            Atterissage atterissage = new Atterissage(LogicalDateTime.Now(), this);
             // L'avion atterit
         } else {
-            // L'avion ne peut pas atterir
+            // L'avion attends et redemande l'autorisation d'atterir
+            // methode pour attendre
+            DemandeAccesPiste(tour);
         }
-
     }
 
-    public void DemandeDecollage(Tour tour) {
-        tour.AutorisationDecollage(this);
+    public void DemandeRoulage(Tour tour, String action) {
+        if (tour.AutorisationRoulage(this, action)){
+            Post(new Roulement(LogicalDateTime.Now(), this));
+//            Atterissage atterissage = new Atterissage(LogicalDateTime.Now(), this);
+            // L'avion roule jusqu'au gate
+        } else {
+            // L'avion attends et redemande l'autorisation d'atterir
+            // methode pour attendre
+            DemandeRoulage(tour, action);
+        }
     }
-
-    public void DemandeRoulageEntrant(Tour tour) {
-        tour.AutorisationRoulageEntrant(this);
-    }
-
-    public void DemandeRoulageSortant(Tour tour) {
-        tour.AutorisationRoulageSortant(this);
-    }
-
 
     public void FinAtterrissage(Tour tour) {
-
-        // TODO Auto-generated method stub
         // Mettre la piste en libre
-
+        getEngine().getPiste().setOccupe(false);
     }
 
     public void FinDecollage(Tour tour) {
-        // TODO Auto-generated method stub
         // Mettre la piste en libre
-
+        getEngine().getPiste().setOccupe(false);
     }
 
     @Override
