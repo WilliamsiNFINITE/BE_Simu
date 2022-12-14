@@ -1,4 +1,12 @@
 package aeroport;
 
-public class Avion {
+import engine.EntiteSimulee;
+import engine.InitData;
+import engine.SimuEngine;
+
+public class Avion extends EntiteSimulee {
+
+    public Avion(SimuEngine engine, InitData ini) {
+        super(engine, ini);
+    }
 }
