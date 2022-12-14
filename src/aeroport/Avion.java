@@ -16,7 +16,6 @@ public class Avion extends EntiteSimulee {
     }
 
 
-
     //Getter
     public String getCompagnie() {
         return compagnie;
@@ -61,5 +60,8 @@ public class Avion extends EntiteSimulee {
 
     }
 
+    @Override
+    public void activate() {
 
+    }
 }

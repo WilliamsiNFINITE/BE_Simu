@@ -83,4 +83,7 @@ public abstract class EntiteSimulee {
 	protected void terminate() {
 		etat = EtatEntite.DEAD;
 	}
+
+	public abstract void activate();
+
 }

@@ -1,14 +1,11 @@
 package aeroport;
 
-import engine.InitData;
-import engine.ScenarioInitData;
-import engine.SimEvent;
-import engine.SimuEngine;
+import engine.*;
 import enstabretagne.base.time.LogicalDateTime;
 import enstabretagne.base.time.LogicalDuration;
 
 // comment
-public class ScenarioAeroport extends engine.Scenario {
+public class ScenarioAeroport extends Scenario {
 
     int nbAvions;
 
@@ -26,6 +23,12 @@ public class ScenarioAeroport extends engine.Scenario {
 
         Post(new CreerAvion(getEngine().SimulationDate().add(LogicalDuration.ofMinutes(8)), "Avion"));
     }
+
+    public int getNbAvions() {
+        return nbAvions;
+    }
+
+
 
     private static class CreerAvion extends SimEvent {
 
