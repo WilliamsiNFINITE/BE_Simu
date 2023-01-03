@@ -47,7 +47,7 @@ public class Avion extends EntiteSimulee {
         super.init();
     }
 
-    public Boolean DemandeAccesPiste(Tour tour) { // TODO mettre en booleen ???
+    public Boolean DemandeAccesPiste(Tour tour) {
         if (tour.AutorisationAccesPiste(this)){
 //            Post(new Atterissage(LogicalDateTime.Now(), this));
             return true;
@@ -60,7 +60,7 @@ public class Avion extends EntiteSimulee {
         }
     }
 
-    public void DemandeRoulage(Tour tour, String action) {
+    public Boolean DemandeRoulage(Tour tour, String action) {
         if (tour.AutorisationRoulage(this, action)){
             Post(new Roulement(LogicalDateTime.Now(), this));
 //            Atterissage atterissage = new Atterissage(LogicalDateTime.Now(), this);
@@ -70,6 +70,7 @@ public class Avion extends EntiteSimulee {
             // methode pour attendre
             DemandeRoulage(tour, action);
         }
+        return false;
     }
 
     public void FinAtterrissage(Tour tour) {

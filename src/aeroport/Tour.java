@@ -4,6 +4,8 @@ import engine.EntiteSimulee;
 import engine.InitData;
 import engine.SimuEngine;
 
+import java.util.Objects;
+
 public class Tour extends EntiteSimulee {
 
     //Attributs
@@ -17,6 +19,7 @@ public class Tour extends EntiteSimulee {
     public String getName() {
         return super.getName();
     }
+
     //Setter
     public void setName(String name) {
         super.setName(name);
@@ -40,19 +43,34 @@ public class Tour extends EntiteSimulee {
 
     public Boolean AutorisationRoulage(Avion avion, String action) {
         // Verifie si le taxiway est libre pour le roulement de l'avion
-        if (!this.getEngine().getEnteringTaxiway().getOccupe()) {
-            // Si le taxiway est libre, l'avion roule
-            this.getEngine().getEnteringTaxiway().setOccupe(true);
-            return true;
+
+        if (Objects.equals(action, "Atterrissage")) {
+            if (!this.getEngine().getEnteringTaxiway().getOccupe()) {
+                // Si le taxiway est libre, l'avion roule
+                this.getEngine().getEnteringTaxiway().setOccupe(true);
+                return true;
+            } else {
+                // Si le taxiway est occupé, l'avion ne peut pas rouler
+                return false;
+            }
         } else {
-            // Si le taxiway est occupé, l'avion ne peut pas rouler
-            return false;
+            if (Objects.equals(action, "Decollage")) {
+                if (!this.getEngine().getLeavingTaxiway().getOccupe()) {
+                    // Si le taxiway est libre, l'avion roule
+                    this.getEngine().getLeavingTaxiway().setOccupe(true);
+                    return true;
+                } else {
+                    // Si le taxiway est occupé, l'avion ne peut pas rouler
+                    return false;
+                }
+            }
         }
+        return false;
     }
 
-
     @Override
-    public void activate() {
+    public void activate () {
 
     }
 }
+

@@ -58,7 +58,7 @@ public class ScenarioAeroport extends Scenario {
     public void scenarioTest() {
         //creation d'un avion
         for (int i = 0; i < 10; i++) {
-            Post(new CreerAvion(getEngine(), this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(i)), "Avion " + i));
+//            Post(new CreerAvion(getEngine(), this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(i)), "Avion " + i));
             Post(new Atterissage(getEngine().SimulationDate(), new Avion(getEngine(), new InitDataAvion("Avion " + i))));
         }
 //        Post(new CreerAvion(getEngine(),this.getEngine().SimulationDate(), "Avion"));
