@@ -23,7 +23,7 @@ import enstabretagne.simulation.basics.SortedList;
  * - l'identifiant du sc�nario en cours * 
  */
 public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
-	
+
 	//�ch�ancier. Pi�ce principale du moteur
 	private SortedList<SimEvent> echeancier;
 	//dates de d�but et fin de fonctionnement de la simulation
@@ -200,6 +200,8 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 	}
 
 	public TaxiWay getEnteringTaxiway() {
+		//Attention, cette méthode ne fonctionne que pour 1 seul taxiway entrant
+		// Pour plusieurs taxiway entrant, il faudra faire une liste ou utiliser une méthode similaire à celle de getGate()
 		for (EntiteSimulee es : mesEntitesSimulees) {
 			if (es instanceof TaxiWay) {
 				TaxiWay tw = (TaxiWay) es;
@@ -208,11 +210,12 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 				}
 			}
 		}
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public TaxiWay getLeavingTaxiway() {
+		//Attention, cette méthode ne fonctionne que pour 1 seul taxiway sortant
+		// Pour plusieurs taxiway sortant, il faudra faire une liste ou utiliser une méthode similaire à celle de getGate()
 		for (EntiteSimulee es : mesEntitesSimulees) {
 			if (es instanceof TaxiWay) {
 				TaxiWay tw = (TaxiWay) es;
@@ -221,9 +224,20 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 				}
 			}
 		}
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 
+	public boolean getGate() {
+		//returns true if at least one gate is free
+		for (EntiteSimulee es : mesEntitesSimulees) {
+			if (es instanceof Gate) {
+				Gate g = (Gate) es;
+				if (!g.getOccupe()){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
