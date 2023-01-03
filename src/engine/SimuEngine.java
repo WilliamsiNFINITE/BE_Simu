@@ -35,6 +35,7 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 
 	//temps logique de la simulation g�r� par le moteur de simulation
 	private LogicalDateTime currentDate;
+	private LogicalDateTime currentTime;
 	protected LogicalDateTime getCurrentDate()
 	{
 		return currentDate;
@@ -239,5 +240,12 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 			}
 		}
 		return false;
+	}
+
+	public LogicalDateTime getCurrentTime() {
+		return currentTime;
+	}
+	public void setCurrentTime(LogicalDateTime currentTime) {
+		this.currentTime = currentTime;
 	}
 }

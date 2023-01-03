@@ -16,7 +16,7 @@ public class Aeroport {
 
         engine.initSimulation(start, end);
 
-        PlanAeroport planAeroport = new PlanAeroport(engine, 1, start, end);
+        PlanAeroport planAeroport = new PlanAeroport(engine, 1, 3,start, end);
 
         planAeroport.initScenario();
 

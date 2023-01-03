@@ -72,9 +72,12 @@ public class ScenarioAeroport extends Scenario {
         }
 
 
-       for(int i = 0; i < 1000; i++){
+       for(int i = 0; i < 100; i++){
            Post(new Atterissage(getEngine().SimulationDate().add(LogicalDuration.ofMinutes(i+ 30)),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
            Logger.DataSimple("Logger_loi_exp",getNextDate4AvionCreation().toString());
+//           Logger.DataSimple("Logger_test_date",new LogicalDateTime("14/12/2022 07:03").getDayOfWeek().getValue());
+//           Logger.DataSimple("Logger_test_date",new LogicalDateTime("14/12/2022 07:03").truncateToDays().add(LogicalDuration.ofHours(10)));
+//           Logger.DataSimple("Logger_test_date",new LogicalDateTime("14/12/2022 07:03").compareTo(new LogicalDateTime("14/12/2022 07:05")));
        }
 
         //TODO cycle de l'aeroport : horaires, jours, semaines, mois.
