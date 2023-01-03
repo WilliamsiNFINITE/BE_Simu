@@ -6,6 +6,9 @@ import enstabretagne.base.math.MoreRandom;
 import enstabretagne.base.time.LogicalDateTime;
 import enstabretagne.base.time.LogicalDuration;
 
+import java.util.ArrayList;
+
+
 // comment
 public class ScenarioAeroport extends Scenario {
 
@@ -56,15 +59,28 @@ public class ScenarioAeroport extends Scenario {
 
 
     public void scenarioTest() {
-        //creation d'un avion
-        for (int i = 0; i < 10; i++) {
+
+        ArrayList<CreerAvion> listAvion = new ArrayList<CreerAvion>();
+
+        for(int i = 0; i < 1000; i++) {
+            listAvion.add(new CreerAvion(getEngine(),this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(i)), "Avion " + i));
+        }
+
+
+       for(int i = 0; i < 24; i++){
+           Post(new Atterissage(getEngine().SimulationDate().add(LogicalDuration.ofHours(i)),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
+       }
+
+
+       /* //creation d'un avion
+        for (int i = 0; i < 1000; i++) {
 //            Post(new CreerAvion(getEngine(), this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(i)), "Avion " + i));
             Post(new Atterissage(getEngine().SimulationDate(), new Avion(getEngine(), new InitDataAvion("Avion " + i))));
         }
 //        Post(new CreerAvion(getEngine(),this.getEngine().SimulationDate(), "Avion"));
 ////        //decollage de l'avion
 ////        Post(new Decollage(getEngine().SimulationDate(),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
-//        Post(new Atterissage(getEngine().SimulationDate(),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
+//        Post(new Atterissage(getEngine().SimulationDate(),new Avion(getEngine(), new InitDataAvion("Avion 1")))); */
     }
 
     private static class CreerAvion extends SimEvent {
