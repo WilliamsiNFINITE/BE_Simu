@@ -7,12 +7,10 @@ elle a un nom...*/
 
 public class InitDataGate extends InitData {
 
-	Aeroport aeroport;
 	Boolean occupe;
 
-	public InitDataGate(String name, Aeroport aeroport, Boolean occupe) {
+	public InitDataGate(String name, Boolean occupe) {
 		super(name);
-		this.aeroport = aeroport;
 		this.occupe = occupe;
 
 	}
