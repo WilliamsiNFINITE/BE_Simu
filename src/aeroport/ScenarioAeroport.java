@@ -17,6 +17,8 @@ public class ScenarioAeroport extends Scenario {
     int nbTaxiwayEntrant;
     int nbTaxiwaySortant;
 
+
+
     ScenarioAeroportInit iniAirport;
     public ScenarioAeroport(SimuEngine engine, ScenarioAeroportInit init, int nbAvions, int nbPiste, int nbTaxiwayEntrant, int nbTaxiwaySortant) {
         super(engine, init);
@@ -70,9 +72,19 @@ public class ScenarioAeroport extends Scenario {
         }
 
 
-       for(int i = 0; i < 24; i++){
-           Post(new Atterissage(getEngine().SimulationDate().add(getNextDate4AvionCreation()),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
+       for(int i = 0; i < 1000; i++){
+           Post(new Atterissage(getEngine().SimulationDate().add(LogicalDuration.ofMinutes(i+ 30)),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
+           Logger.DataSimple("Logger_loi_exp",getNextDate4AvionCreation().toString());
        }
+
+        //TODO cycle de l'aeroport : horaires, jours, semaines, mois.
+        // L'aeroport est ouvert entre 7h et 22h
+        // Le weekend, la fréquence est divisée par deux (40 minutes)
+        // Les heures de pointes sont de 7h à 10h et de 17h à 19h (10h à 17h, 20 minutes)
+        // En heure de pointe, la fréquence est multipliée par 2 (10 minutes)
+
+        //New day
+
 
 
        /* //creation d'un avion
