@@ -18,9 +18,9 @@ public class ScenarioAeroport extends Scenario {
     int nbTaxiwaySortant;
 
     ScenarioAeroportInit iniAirport;
-    public ScenarioAeroport(SimuEngine engine, ScenarioInitData init, int nbAvions, int nbPiste, int nbTaxiwayEntrant, int nbTaxiwaySortant) {
+    public ScenarioAeroport(SimuEngine engine, ScenarioAeroportInit init, int nbAvions, int nbPiste, int nbTaxiwayEntrant, int nbTaxiwaySortant) {
         super(engine, init);
-        iniAirport = (ScenarioAeroportInit) init;
+        iniAirport = init;
 
         /* this.nbAvions = nbAvions;
         this.nbPiste = nbPiste;
