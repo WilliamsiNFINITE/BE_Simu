@@ -18,10 +18,7 @@ public class Atterissage extends SimEvent {
 
     @Override
     public void process() {
-        MoreRandom moreRandom = new MoreRandom();
-        Logger.Detail(null, "main", String.valueOf(moreRandom.nextGaussian()));
-
-//        Logger.Detail(this.entitePorteuseEvenement, "Atterissage.Process", avion.getName() + " en train d'atterrire " + " � " +getDateOccurence());
-//        entitePorteuseEvenement.Post(this);
+        //Ici on ne traite que de l'événementiel (pas de traitement pour savoir si l'avion a le droit d'atterrir ou non)
+        Logger.DataSimple("Atterissage", "Atterissage de l'avion " + avion.getName() + " à " + getDateOccurence());
     }
 }

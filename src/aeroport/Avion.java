@@ -42,21 +42,21 @@ public class Avion extends EntiteSimulee {
 
     //Méthodes
 
-
     @Override
     protected void init() {
         super.init();
     }
 
-    public void DemandeAccesPiste(Tour tour) {
+    public Boolean DemandeAccesPiste(Tour tour) { // TODO mettre en booleen ???
         if (tour.AutorisationAccesPiste(this)){
-            Post(new Atterissage(LogicalDateTime.Now(), this));
-//            Atterissage atterissage = new Atterissage(LogicalDateTime.Now(), this);
+//            Post(new Atterissage(LogicalDateTime.Now(), this));
+            return true;
             // L'avion atterit
         } else {
             // L'avion attends et redemande l'autorisation d'atterir
             // methode pour attendre
             DemandeAccesPiste(tour);
+            return false;
         }
     }
 

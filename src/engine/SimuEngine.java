@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import aeroport.Gate;
 import aeroport.Piste;
 import aeroport.TaxiWay;
+import aeroport.Tour;
 import enstabretagne.base.logger.Logger;
 import enstabretagne.base.math.MoreRandom;
 import enstabretagne.base.time.LogicalDateTime;
@@ -184,6 +185,15 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 		for (EntiteSimulee e : mesEntitesSimulees) {
 			if (e instanceof Piste) {
 				return (Piste) e;
+			}
+		}
+		return null;
+	}
+
+	public Tour getTour() {
+		for (EntiteSimulee e : mesEntitesSimulees) {
+			if (e instanceof Tour) {
+				return (Tour) e;
 			}
 		}
 		return null;
