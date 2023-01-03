@@ -45,7 +45,7 @@ public class Tour extends EntiteSimulee {
         // Verifie si le taxiway est libre pour le roulement de l'avion
 
         if (Objects.equals(action, "Atterrissage")) {
-            if (!this.getEngine().getEnteringTaxiway().getOccupe()) {
+            if ((!this.getEngine().getEnteringTaxiway().getOccupe()) && (!this.getEngine().getGate())  ) { //on verifie que le taxiway est libre et qu'un gate est libre
                 // Si le taxiway est libre, l'avion roule
                 this.getEngine().getEnteringTaxiway().setOccupe(true);
                 return true;

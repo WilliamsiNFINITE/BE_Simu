@@ -1,6 +1,9 @@
 package aeroport;
 
-public class Gate {
+import engine.EntiteSimulee;
+import engine.SimuEngine;
+
+public class Gate extends EntiteSimulee {
 
     //Attributs
     String nomGate;
@@ -8,10 +11,16 @@ public class Gate {
     Boolean occupe;
 
     //Constructeur
-    public Gate(String nomGate, Aeroport aeroport) {
-        this.nomGate = nomGate;
-        this.aeroport = aeroport;
-        this.occupe = false;
+    public Gate(SimuEngine engine, InitDataGate ini) {
+        super(engine, ini);
+        this.nomGate = ini.getName();
+        this.aeroport = ini.aeroport;
+        this.occupe = ini.occupe;
+    }
+
+    @Override
+    public void activate() {
+
     }
 
 
