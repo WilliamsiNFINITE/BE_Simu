@@ -17,12 +17,15 @@ public class ScenarioAeroport extends Scenario {
     int nbTaxiwayEntrant;
     int nbTaxiwaySortant;
 
+    ScenarioAirportInit iniAirport;
     public ScenarioAeroport(SimuEngine engine, ScenarioInitData init, int nbAvions, int nbPiste, int nbTaxiwayEntrant, int nbTaxiwaySortant) {
         super(engine, init);
-        this.nbAvions = nbAvions;
+        iniAirport = (ScenarioAirportInit) init;
+
+        /* this.nbAvions = nbAvions;
         this.nbPiste = nbPiste;
         this.nbTaxiwayEntrant = nbTaxiwayEntrant;
-        this.nbTaxiwaySortant = nbTaxiwaySortant;
+        this.nbTaxiwaySortant = nbTaxiwaySortant; */
     }
 
     @Override
@@ -68,7 +71,7 @@ public class ScenarioAeroport extends Scenario {
 
 
        for(int i = 0; i < 24; i++){
-           Post(new Atterissage(getEngine().SimulationDate().add(LogicalDuration.ofHours(i)),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
+           Post(new Atterissage(getEngine().SimulationDate().add(getNextDate4AvionCreation()),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
        }
 
 
@@ -82,6 +85,12 @@ public class ScenarioAeroport extends Scenario {
 ////        Post(new Decollage(getEngine().SimulationDate(),new Avion(getEngine(), new InitDataAvion("Avion 1"))));
 //        Post(new Atterissage(getEngine().SimulationDate(),new Avion(getEngine(), new InitDataAvion("Avion 1")))); */
     }
+
+    LogicalDuration getNextDate4AvionCreation() {
+        double time = getRandomGenerator().nextExp(iniAirport.frequenceArriveeAvion);
+        return LogicalDuration.ofMinutes((long) time);
+    }
+
 
     private static class CreerAvion extends SimEvent {
 
