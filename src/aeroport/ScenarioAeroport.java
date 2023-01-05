@@ -80,18 +80,32 @@ public class ScenarioAeroport extends Scenario {
         }
 
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 100; i++){
             Avion currentAvion = listAvion.get(i).getAvion();
             if(currentAvion.DemandeAccesPiste(tour)){
-                Post(new Atterissage(getEngine().SimulationDate().add(getNextDate4AvionCreation()), currentAvion));
+                LogicalDuration date = getNextDate4AvionCreation();
+                Post(new Atterissage(getEngine().SimulationDate().add(date), currentAvion));
                 currentAvion.FinAtterrissage(tour);
 
                 if(currentAvion.DemandeRoulage(tour, "Atterrissage")){
-                    Post(new Roulement(getEngine().SimulationDate(), currentAvion));
+                    Post(new Roulement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(2))), currentAvion));
                     currentAvion.FinRoulage(getEngine().getEnteringTaxiway());
+
+                    Gate aGate = getAvailableGate();
+                    Post(new Dechargement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(2))), currentAvion, aGate));
+                    aGate.setOccupe(true);
                 }
             }
         }
+    }
+
+    private Gate getAvailableGate(){
+        for(int i = 0; i < gates.size(); i++) {
+            if(!gates.get(i).occupe) return gates.get(i);
+
+        }
+
+        return null;
     }
 
     LogicalDuration getNextDate4AvionCreation() {
