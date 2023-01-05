@@ -77,7 +77,7 @@ public class ScenarioAeroport extends Scenario {
     public void atterisagge(int i){
         Avion currentAvion = listAvion.get(i).getAvion();
         if(currentAvion.DemandeAccesPiste(tour)){
-            LogicalDuration date = getNextDate4AvionCreation();
+            LogicalDuration date = getNextDate4AvionCreation(this.getEngine().SimulationDate());
 
             LogicalDateTime testDate = getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 11)));
 
@@ -99,7 +99,7 @@ public class ScenarioAeroport extends Scenario {
     public void decollage(int i){
         Avion currentAvion = listAvion.get(i).getAvion();
         if(currentAvion.DemandeAccesPiste(tour)){
-            LogicalDuration date = getNextDate4AvionCreation();
+            LogicalDuration date = getNextDate4AvionCreation(this.getEngine().SimulationDate());
             Post(new Decollage(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 6))), currentAvion));
             currentAvion.FinDecollage(tour);
             Gate occupiedGate = getOccupiedGate();
@@ -115,7 +115,8 @@ public class ScenarioAeroport extends Scenario {
         }
 
         for(int i = 0; i < 200; i++){
-            if(i % 3 == 0){
+            int random = getRandomGenerator().nextInt();
+            if(random % 3 == 0){
                 atterisagge(i);
                 continue;
             }
