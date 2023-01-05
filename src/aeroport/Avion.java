@@ -49,13 +49,13 @@ public class Avion extends EntiteSimulee {
 
     public Boolean DemandeAccesPiste(Tour tour) {
         if (tour.AutorisationAccesPiste(this)){
-//            Post(new Atterissage(LogicalDateTime.Now(), this));
+            Post(new Atterissage(getEngine().SimulationDate(), this));
             return true;
             // L'avion atterit
         } else {
             // L'avion attends et redemande l'autorisation d'atterir
             // methode pour attendre
-            DemandeAccesPiste(tour);
+            // DemandeAccesPiste(tour);
             return false;
         }
     }
@@ -63,14 +63,14 @@ public class Avion extends EntiteSimulee {
     public Boolean DemandeRoulage(Tour tour, String action) {
         if (tour.AutorisationRoulage(this, action)){
             Post(new Roulement(LogicalDateTime.Now(), this));
-//            Atterissage atterissage = new Atterissage(LogicalDateTime.Now(), this);
             // L'avion roule jusqu'au gate
+            return true;
         } else {
             // L'avion attends et redemande l'autorisation d'atterir
             // methode pour attendre
-            DemandeRoulage(tour, action);
+            // DemandeRoulage(tour, action);
+            return false;
         }
-        return false;
     }
 
     public void FinAtterrissage(Tour tour) {
@@ -81,6 +81,11 @@ public class Avion extends EntiteSimulee {
     public void FinDecollage(Tour tour) {
         // Mettre la piste en libre
         getEngine().getPiste().setOccupe(false);
+    }
+
+    public void FinRoulage(TaxiWay taxiWay) {
+        // Mettre la tw en libre
+        taxiWay.setOccupe(false);
     }
 
     @Override

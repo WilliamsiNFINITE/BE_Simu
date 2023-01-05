@@ -7,7 +7,7 @@ public class Gate extends EntiteSimulee {
 
     //Attributs
     String nomGate;
-    Boolean occupe;
+    Boolean occupe = false;
 
     //Constructeur
     public Gate(SimuEngine engine, InitDataGate ini) {

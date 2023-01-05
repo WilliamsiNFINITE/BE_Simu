@@ -6,7 +6,7 @@ import engine.SimuEngine;
 public class TaxiWay extends EntiteSimulee {
     SimuEngine engine;
     String nomTaxiWay;
-    Boolean occupe;
+    Boolean occupe = false;
     String direction;
 
     //Constructeur

@@ -15,7 +15,6 @@ public class Dechargement extends SimEvent {
 
     @Override
     public void process() {
-        Logger.Detail(this.entitePorteuseEvenement, "Dechargement.Process", avion.getName() + " en train de decharger les voyageurs " + " � " +getDateOccurence());
-        entitePorteuseEvenement.Post(this);
+        Logger.DataSimple("Dechargement", "Dechargement de l'avion " + avion.getName() + " à " + getDateOccurence());
     }
 }

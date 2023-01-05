@@ -4,11 +4,15 @@ import engine.EntiteSimulee;
 import engine.InitData;
 import engine.SimuEngine;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Tour extends EntiteSimulee {
 
     //Attributs
+
+    List<Gate> gates = new ArrayList<>();
 
     //Constructeur
     public Tour(SimuEngine engine, InitData ini) {
@@ -29,7 +33,7 @@ public class Tour extends EntiteSimulee {
 
     public Boolean AutorisationAccesPiste(Avion avion) {
         // Attribution d'un numero de vol à l'avion de la forme F + entier aléatoire de 00 à 99
-        avion.setName("F" + (int) (Math.random() * 100));
+        avion.setName("F" + (int) (Math.random() * 1000));
         // Verifie si la piste est libre pour l'atterrissage
         if (!this.getEngine().getPiste().getOccupe()) {
             // Si la piste est libre, l'avion atterit
@@ -45,7 +49,7 @@ public class Tour extends EntiteSimulee {
         // Verifie si le taxiway est libre pour le roulement de l'avion
 
         if (Objects.equals(action, "Atterrissage")) {
-            if ((!this.getEngine().getEnteringTaxiway().getOccupe()) && (!this.getEngine().getGate())  ) { //on verifie que le taxiway est libre et qu'un gate est libre
+            if ((!this.getEngine().getEnteringTaxiway().getOccupe()) && (this.getEngine().getGate())  ) { //on verifie que le taxiway est libre et qu'un gate est libre
                 // Si le taxiway est libre, l'avion roule
                 this.getEngine().getEnteringTaxiway().setOccupe(true);
                 return true;

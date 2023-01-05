@@ -14,7 +14,6 @@ public class Roulement extends SimEvent {
 
     @Override
     public void process() {
-        Logger.Detail(this.entitePorteuseEvenement, "Roulement.Process", avion.getName() + " en train de rouler " + " � " +getDateOccurence());
-        entitePorteuseEvenement.Post(this);
+        Logger.DataSimple("Roulement", "Roulement de l'avion " + avion.getName() + " à " + getDateOccurence());
     }
 }
