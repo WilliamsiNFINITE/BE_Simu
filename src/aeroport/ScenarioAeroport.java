@@ -35,7 +35,7 @@ public class ScenarioAeroport extends Scenario {
 
     @Override
     public void creerEntitesSimulees() {
-        System.out.println("Création des entités simulées (ScenarioAeroport)");
+        // System.out.println("Création des entités simulées (ScenarioAeroport)");
     }
 
     public int getNbAvions() {
@@ -75,16 +75,22 @@ public class ScenarioAeroport extends Scenario {
 
         ArrayList<CreerAvion> listAvion = new ArrayList<CreerAvion>();
 
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 200; i++) {
             listAvion.add(new CreerAvion(getEngine(),this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(i)), "Avion " + i));
         }
 
 
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 200; i++){
+
+
             Avion currentAvion = listAvion.get(i).getAvion();
             if(currentAvion.DemandeAccesPiste(tour)){
                 LogicalDuration date = getNextDate4AvionCreation();
-                Post(new Atterissage(getEngine().SimulationDate().add(date), currentAvion));
+
+                LogicalDateTime testDate = getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 11)));
+
+                System.out.println("In Scenario: " + testDate);
+                Post(new Atterissage(testDate, currentAvion));
                 currentAvion.FinAtterrissage(tour);
 
                 if(currentAvion.DemandeRoulage(tour, "Atterrissage")){
@@ -102,8 +108,11 @@ public class ScenarioAeroport extends Scenario {
             Avion currentAvion = listAvion.get(i).getAvion();
             if(currentAvion.DemandeAccesPiste(tour)){
                 LogicalDuration date = getNextDate4AvionCreation();
-                Post(new Decollage(getEngine().SimulationDate().add(date), currentAvion));
+                Post(new Decollage(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 6))), currentAvion));
                 currentAvion.FinDecollage(tour);
+                Gate occupiedGate = getOccupiedGate();
+                if(occupiedGate == null) continue;
+                occupiedGate.setOccupe(false);
             }
         }
     }
@@ -111,9 +120,16 @@ public class ScenarioAeroport extends Scenario {
     private Gate getAvailableGate(){
         for(int i = 0; i < gates.size(); i++) {
             if(!gates.get(i).occupe) return gates.get(i);
-
         }
 
+        return null;
+    }
+
+    private Gate getOccupiedGate(){
+        for(int i = 0; i < gates.size(); i++) {
+            // System.out.println(gates.get(i).occupe);
+            if(gates.get(i).occupe) return gates.get(i);
+        }
         return null;
     }
 

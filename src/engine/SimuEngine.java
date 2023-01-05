@@ -103,7 +103,7 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 		{
 			//on prend le premier �v�nement suivant de l'�ch�ancier
 			SimEvent ev = echeancier.first();
-			System.out.println("event name (SimuEngine) : "+ev.entitePorteuseEvenement.getName());
+			// System.out.println("event name (SimuEngine) : "+ev.entitePorteuseEvenement.getName());
 			//on l'enl�ve de l'�ch�ancier
 			echeancier.remove(ev);
 			
