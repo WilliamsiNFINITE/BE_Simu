@@ -9,12 +9,14 @@ public class ScenarioAeroportInit extends ScenarioInitData {
         this.frequenceArriveeAvion = frequenceArriveeAvion;
         this.avioniniType = avionType;
         this.aeroportInit = airportIni;
+        this.debut = debut;
     }
 
     public void setName(String newname) {
         this.name = newname;
     }
 
+    public final LogicalDateTime debut;
     public final double frequenceArriveeAvion;
     public final InitDataAvion avioniniType;
     public final AeroportInit aeroportInit;

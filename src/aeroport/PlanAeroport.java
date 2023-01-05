@@ -13,7 +13,7 @@ public class PlanAeroport extends Plan {
     LinkedList<ScenarioAeroport> scenarioAeroports;
 
     int nbJour;
-    double frequenceArriveeAvion;
+    double frequenceArriveeAvion = 1/20.0;
     public PlanAeroport(SimuEngine engine, int nbReplique, int nbJour, LogicalDateTime debut, LogicalDateTime fin) {
         super(engine, nbReplique);
         scenarioAeroports = new LinkedList<>();
@@ -30,33 +30,10 @@ public class PlanAeroport extends Plan {
     @Override
     public void initScenario() {
         // On met le jour initial dans le moteur de simulation
-        this.engine.setCurrentTime(debut);
-
-        // On d�finit les heures de pointes de l'a�roport en comman�ant par le jour du debut de la simulation
-        LogicalDateTime debutHeurePointeMatin = debut.truncateToDays().add(LogicalDuration.ofHours(7)); // 7h
-        LogicalDateTime finHeurePointeMatin = debut.truncateToDays().add(LogicalDuration.ofHours(10)); // 10h
-        LogicalDateTime debutHeurePointeSoir = debut.truncateToDays().add(LogicalDuration.ofHours(17)); // 17h
-        LogicalDateTime finHeurePointeSoir = debut.truncateToDays().add(LogicalDuration.ofHours(19)); // 19h
+//        this.engine.SimulationDate(debut);
 
         for (int i = 0; i < getNbJour(); i++) {
             //getting current time of day
-            LogicalDateTime currentTime = this.engine.getCurrentTime();
-            //test to see if the day is a weekend
-            if (currentTime.getDayOfWeek().getValue() == 6 || currentTime.getDayOfWeek().getValue() == 7) {
-                //if it is a weekend, we use a frequency of 40 minutes
-                frequenceArriveeAvion = 1.0 / 40.0;
-            }
-            else{
-                if (((currentTime.compareTo(debutHeurePointeMatin) > 0) && (finHeurePointeMatin.compareTo(currentTime) > 0))  || ((currentTime.compareTo(debutHeurePointeSoir) > 0) && (finHeurePointeSoir.compareTo(currentTime) > 0))) {
-                    //if it is a weekday and between 7 and 10 or between 17 and 19, we use a frequency of 10 minutes
-                    frequenceArriveeAvion = 1.0/10.0;
-                }
-                else{
-                    //if it is a weekday and not between 7 and 10 or between 17 and 19, we use a frequency of 20 minutes
-                    frequenceArriveeAvion = 1.0/20.0;
-                }
-            }
-
             scenarioAeroports.add(new ScenarioAeroport(this.getEngine(), new ScenarioAeroportInit(String.format("Jour %s", i), i, debut, fin, frequenceArriveeAvion, new InitDataAvion("Avion Init"), new AeroportInit("Aeroport Init")), 10, 1, 1, 1));
         }
     }
