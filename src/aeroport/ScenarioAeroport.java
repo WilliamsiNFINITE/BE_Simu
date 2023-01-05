@@ -97,6 +97,15 @@ public class ScenarioAeroport extends Scenario {
                 }
             }
         }
+
+        for(int i = 0; i < 100; i++){
+            Avion currentAvion = listAvion.get(i).getAvion();
+            if(currentAvion.DemandeAccesPiste(tour)){
+                LogicalDuration date = getNextDate4AvionCreation();
+                Post(new Decollage(getEngine().SimulationDate().add(date), currentAvion));
+                currentAvion.FinDecollage(tour);
+            }
+        }
     }
 
     private Gate getAvailableGate(){
