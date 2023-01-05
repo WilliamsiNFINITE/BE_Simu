@@ -32,7 +32,7 @@ public class PlanAeroport extends Plan {
         // On met le jour initial dans le moteur de simulation
         this.engine.setCurrentTime(debut);
 
-        // On définit les heures de pointes de l'aéroport en commançant par le jour du debut de la simulation
+        // On dï¿½finit les heures de pointes de l'aï¿½roport en commanï¿½ant par le jour du debut de la simulation
         LogicalDateTime debutHeurePointeMatin = debut.truncateToDays().add(LogicalDuration.ofHours(7)); // 7h
         LogicalDateTime finHeurePointeMatin = debut.truncateToDays().add(LogicalDuration.ofHours(10)); // 10h
         LogicalDateTime debutHeurePointeSoir = debut.truncateToDays().add(LogicalDuration.ofHours(17)); // 17h
@@ -57,7 +57,7 @@ public class PlanAeroport extends Plan {
                 }
             }
 
-            scenarioAeroports.add(new ScenarioAeroport(this.getEngine(), new ScenarioAeroportInit(String.format("Scenario %s", i), i, debut, fin, frequenceArriveeAvion, new InitDataAvion("Avion Init"), new AeroportInit("Aeroport Init")), 10, 1, 1, 1));
+            scenarioAeroports.add(new ScenarioAeroport(this.getEngine(), new ScenarioAeroportInit(String.format("Jour %s", i), i, debut, fin, frequenceArriveeAvion, new InitDataAvion("Avion Init"), new AeroportInit("Aeroport Init")), 10, 1, 1, 1));
         }
     }
 
