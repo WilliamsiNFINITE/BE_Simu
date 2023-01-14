@@ -14,6 +14,7 @@ import java.util.List;
 public class ScenarioAeroport extends Scenario {
 
     int nbAvions;
+    double parametreMeteo = 0.0;
 
     List<Gate> gates = new ArrayList<>();
     Tour tour;
@@ -72,16 +73,29 @@ public class ScenarioAeroport extends Scenario {
         if(currentAvion.DemandeAccesPiste(tour)){
             LogicalDuration date4AvionCreation = getNextDate4AvionCreation(this.getEngine().SimulationDate().add(LogicalDuration.ofDay(iniAirport.getJour())));
 
-            LogicalDateTime date = getEngine().SimulationDate().add(date4AvionCreation.add(LogicalDuration.ofMinutes(i * 11))).add(LogicalDuration.ofDay(iniAirport.getJour()));
+            //Modification de la durée d'approche en fonction de la météo
+            int dureeApproche = (int) (r.nextInt(2,5) * coefficientMeteo());
 
+            //Détermination de la date d'arrivée du prochain avion
+            LogicalDateTime date = getEngine().SimulationDate().add(date4AvionCreation.add(LogicalDuration.ofMinutes(i * 11 + dureeApproche))).add(LogicalDuration.ofDay(iniAirport.getJour()));
+
+            //Atterrissage
             Post(new Atterissage(date, currentAvion));
+
+            //Lorsque l'atterrissage est terminé on rend compte à la tour
             currentAvion.FinAtterrissage(tour);
 
+            //Demande de roulage
             if(currentAvion.DemandeRoulage(tour, "Atterrissage")){
+
+                //Durée aléatoire pour le roulement
                 int dureeRoulement = r.nextInt(2, 6);
+
+                //Roulement et compte rendu à la tour lorsqu'il est terminé
                 Post(new Roulement(date.add(LogicalDuration.ofMinutes(dureeRoulement)), currentAvion));
                 currentAvion.FinRoulage(getEngine().getEnteringTaxiway());
 
+                //Dechargement de l'avion
                 Gate aGate = getAvailableGate();
                 Post(new Dechargement(date.add(LogicalDuration.ofMinutes(10)), currentAvion, aGate));
                 aGate.setOccupe(true);
@@ -136,6 +150,21 @@ public class ScenarioAeroport extends Scenario {
         return null;
     }
 
+    private double coefficientMeteo() {
+        double coefficientMeteo;
+        double predictiontMeteo = getRandomGenerator().nextExp(8); //Mauvaise météo 1 jour sur 8
+        parametreMeteo += predictiontMeteo;
+        if (parametreMeteo > 1.0) {
+            parametreMeteo = 0.0;
+            coefficientMeteo = 2.0;
+            Logger.DataSimple("Mauvaise météo", "KO");
+        }
+        else {
+            coefficientMeteo = 1.0;
+            Logger.DataSimple("Mauvaise météo", "OK");
+        }
+        return coefficientMeteo;
+    }
 
     LogicalDuration getNextDate4AvionCreation(LogicalDateTime currentTime) {
         // On d�finit les heures de pointes de l'a�roport en comman�ant par le jour du debut de la simulation

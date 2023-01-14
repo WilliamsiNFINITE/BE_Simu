@@ -3,7 +3,6 @@ package aeroport;
 import engine.EntiteSimulee;
 import engine.InitData;
 import engine.SimuEngine;
-import enstabretagne.base.time.LogicalDateTime;
 
 public class Avion extends EntiteSimulee {
 
@@ -49,26 +48,29 @@ public class Avion extends EntiteSimulee {
 
     public Boolean DemandeAccesPiste(Tour tour) {
         if (tour.AutorisationAccesPiste(this)){
+            // L'avion atterit
             Post(new Atterissage(getEngine().SimulationDate(), this));
             return true;
-            // L'avion atterit
         } else {
-            // L'avion attends et redemande l'autorisation d'atterir
+            // L'avion attends est en retard
             // methode pour attendre
             // DemandeAccesPiste(tour);
+            Post(new Retard(getEngine().SimulationDate(), this));
             return false;
         }
     }
 
     public Boolean DemandeRoulage(Tour tour, String action) {
         if (tour.AutorisationRoulage(this, action)){
-            Post(new Roulement(LogicalDateTime.Now(), this));
+//            Post(new Roulement(LogicalDateTime.Now(), this));
+            Post(new Roulement(getEngine().SimulationDate(), this));
             // L'avion roule jusqu'au gate
             return true;
         } else {
-            // L'avion attends et redemande l'autorisation d'atterir
+            // L'avion attends est en retard
             // methode pour attendre
             // DemandeRoulage(tour, action);
+            Post(new Retard(getEngine().SimulationDate(), this));
             return false;
         }
     }
