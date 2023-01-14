@@ -39,6 +39,11 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 	{
 		return currentDate;
 	}
+
+	public void setCurrentDate(LogicalDateTime d)
+	{
+		currentDate = d;
+	}
 	
 	//g�n�rateur de nombre al�atoire principal du moteur de simulation
 	private MoreRandom randomGenerator;
@@ -71,10 +76,33 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 		this.start=start;
 		currentDate = this.start;
 		this.end = end;
-		
-		//initialisation des entit�s simul�es
-		for(EntiteSimulee e:mesEntitesSimulees)
-			e.requestInit();
+
+		try{
+			//initialisation des entit�s simul�es
+			for(EntiteSimulee e: mesEntitesSimulees){
+				e.requestInit();
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean simulationStep() {
+		if (echeancier.size() == 0) return false;
+		SimEvent currentEvent = getCurrentEvent();
+		currentDate = currentEvent.getDateOccurence();
+		if (currentDate.compareTo(end) > 0) return false;
+		echeancier.remove(currentEvent);
+		currentEvent.process();
+		System.gc();
+		return true;
+	}
+
+	public SimEvent getCurrentEvent() {
+		return echeancier.first();
+	}
+	public void simulationLoop() {
+		while (simulationStep());
 	}
 
 	//initialisation de la simulation sans param�tres de d�but et fin

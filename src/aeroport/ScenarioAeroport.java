@@ -14,9 +14,6 @@ import java.util.List;
 public class ScenarioAeroport extends Scenario {
 
     int nbAvions;
-    int nbPiste;
-    int nbTaxiwayEntrant;
-    int nbTaxiwaySortant;
 
     List<Gate> gates = new ArrayList<>();
     Tour tour;
@@ -27,11 +24,6 @@ public class ScenarioAeroport extends Scenario {
     public ScenarioAeroport(SimuEngine engine, ScenarioAeroportInit init, int nbAvions, int nbPiste, int nbTaxiwayEntrant, int nbTaxiwaySortant) {
         super(engine, init);
         iniAirport = init;
-
-        /* this.nbAvions = nbAvions;
-        this.nbPiste = nbPiste;
-        this.nbTaxiwayEntrant = nbTaxiwayEntrant;
-        this.nbTaxiwaySortant = nbTaxiwaySortant; */
     }
 
     @Override
@@ -77,20 +69,19 @@ public class ScenarioAeroport extends Scenario {
     public void atterisagge(int i){
         Avion currentAvion = listAvion.get(i).getAvion();
         if(currentAvion.DemandeAccesPiste(tour)){
-            LogicalDuration date = getNextDate4AvionCreation(this.getEngine().SimulationDate());
+            LogicalDuration date4AvionCreation = getNextDate4AvionCreation(this.getEngine().SimulationDate().add(LogicalDuration.ofDay(iniAirport.getJour())));
 
-            LogicalDateTime testDate = getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 11)));
+            LogicalDateTime date = getEngine().SimulationDate().add(date4AvionCreation.add(LogicalDuration.ofMinutes(i * 11))).add(LogicalDuration.ofDay(iniAirport.getJour()));
 
-            System.out.println("In Scenario: " + testDate);
-            Post(new Atterissage(testDate, currentAvion));
+            Post(new Atterissage(date, currentAvion));
             currentAvion.FinAtterrissage(tour);
 
             if(currentAvion.DemandeRoulage(tour, "Atterrissage")){
-                Post(new Roulement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(2))), currentAvion));
+                Post(new Roulement(date.add(LogicalDuration.ofMinutes(2)), currentAvion));
                 currentAvion.FinRoulage(getEngine().getEnteringTaxiway());
 
                 Gate aGate = getAvailableGate();
-                Post(new Dechargement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(2))), currentAvion, aGate));
+                Post(new Dechargement(date.add(LogicalDuration.ofMinutes(2)), currentAvion, aGate));
                 aGate.setOccupe(true);
             }
         }
@@ -99,10 +90,13 @@ public class ScenarioAeroport extends Scenario {
     public void decollage(int i){
         Avion currentAvion = listAvion.get(i).getAvion();
         if(currentAvion.DemandeAccesPiste(tour)){
-            LogicalDuration date = getNextDate4AvionCreation(this.getEngine().SimulationDate());
-            Post(new Decollage(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 6))), currentAvion));
+            LogicalDuration date4AvionCreation = getNextDate4AvionCreation(this.getEngine().SimulationDate().add(LogicalDuration.ofDay(iniAirport.getJour())));
+            LogicalDateTime date = getEngine().SimulationDate().add(date4AvionCreation.add(LogicalDuration.ofMinutes(i * 10))).add(LogicalDuration.ofDay(iniAirport.getJour()));
+
+            Post(new Decollage(date, currentAvion));
             currentAvion.FinDecollage(tour);
             Gate occupiedGate = getOccupiedGate();
+
             if(occupiedGate == null) return;
             occupiedGate.setOccupe(false);
         }
@@ -110,11 +104,11 @@ public class ScenarioAeroport extends Scenario {
 
     public void scenarioTest() {
 
-        for(int i = 0; i < 200; i++) {
+        for(int i = 0; i < 75; i++) {
             listAvion.add(new CreerAvion(getEngine(),this.getEngine().SimulationDate().add(LogicalDuration.ofMinutes(i)), "Avion " + i));
         }
 
-        for(int i = 0; i < 200; i++){
+        for(int i = 0; i < 75; i++){
             int random = getRandomGenerator().nextInt();
             if(random % 3 == 0){
                 atterisagge(i);
@@ -122,44 +116,6 @@ public class ScenarioAeroport extends Scenario {
             }
             decollage(i);
         }
-
-        /*for(int i = 0; i < 200; i++){
-            Avion currentAvion = listAvion.get(i).getAvion();
-            if(currentAvion.DemandeAccesPiste(tour)){
-
-                LogicalDuration date = getNextDate4AvionCreation(this.getEngine().SimulationDate());
-
-                LogicalDateTime testDate = getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 11)));
-                Logger.DataSimple("date",date.getTotalOfMinutes());
-                Logger.DataSimple("testDate",testDate);
-
-                System.out.println("In Scenario: " + testDate);
-                Post(new Atterissage(testDate, currentAvion));
-                currentAvion.FinAtterrissage(tour);
-
-                if(currentAvion.DemandeRoulage(tour, "Atterrissage")){
-                    Post(new Roulement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(2))), currentAvion));
-                    currentAvion.FinRoulage(getEngine().getEnteringTaxiway());
-
-                    Gate aGate = getAvailableGate();
-                    Post(new Dechargement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(2))), currentAvion, aGate));
-                    aGate.setOccupe(true);
-                }
-            }
-        }
-
-        for(int i = 0; i < 50; i++){
-            Avion currentAvion = listAvion.get(i).getAvion();
-            if(currentAvion.DemandeAccesPiste(tour)){
-                LogicalDuration date = getNextDate4AvionCreation(this.getEngine().SimulationDate());
-                Post(new Decollage(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 6))), currentAvion));
-                currentAvion.FinDecollage(tour);
-                Gate occupiedGate = getOccupiedGate();
-                if(occupiedGate == null) continue;
-                occupiedGate.setOccupe(false);
-            }
-        }*/
-
     }
 
     private Gate getAvailableGate(){

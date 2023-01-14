@@ -4,8 +4,8 @@ import engine.ScenarioInitData;
 import enstabretagne.base.time.LogicalDateTime;
 
 public class ScenarioAeroportInit extends ScenarioInitData {
-    public ScenarioAeroportInit(String name, int graine, LogicalDateTime debut, LogicalDateTime fin, double frequenceArriveeAvion, InitDataAvion avionType, AeroportInit airportIni) {
-        super(name, graine, debut, fin);
+    public ScenarioAeroportInit(String name, int graine, int jour, LogicalDateTime debut, LogicalDateTime fin, double frequenceArriveeAvion, InitDataAvion avionType, AeroportInit airportIni) {
+        super(name, graine, jour, debut, fin);
         this.frequenceArriveeAvion = frequenceArriveeAvion;
         this.avioniniType = avionType;
         this.aeroportInit = airportIni;
