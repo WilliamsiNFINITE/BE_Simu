@@ -11,7 +11,7 @@ public class Aeroport {
         SimuEngine engine = new SimuEngine();
 
         LogicalDateTime start = new LogicalDateTime("01/01/2023 07:00");
-        LogicalDateTime end = new LogicalDateTime("10/04/2023 22:00");
+        LogicalDateTime end = new LogicalDateTime("01/04/2023 22:00");
 
         engine.initSimulation(start, end);
 

@@ -30,11 +30,10 @@ public class PlanAeroport extends Plan {
     @Override
     public void initScenario() {
         // On met le jour initial dans le moteur de simulation
-//        this.engine.SimulationDate(debut);
 
         for (int i = 0; i < getNbJour(); i++) {
             //getting current time of day
-            scenarioAeroports.add(new ScenarioAeroport(this.getEngine(), new ScenarioAeroportInit(String.format("Jour %s", i), i, debut, fin, frequenceArriveeAvion, new InitDataAvion("Avion Init"), new AeroportInit("Aeroport Init")), 10, 1, 1, 1));
+            scenarioAeroports.add(new ScenarioAeroport(this.getEngine(), new ScenarioAeroportInit(String.format("Jour %s", i), 1, i, debut, fin, frequenceArriveeAvion, new InitDataAvion("Avion Init"), new AeroportInit("Aeroport Init")), 10, 1, 1, 1));
         }
     }
 
