@@ -15,6 +15,7 @@ public class Decollage extends SimEvent {
 
     @Override
     public void process() {
-        Logger.DataSimple("Decollage", "Decollage de l'avion " + avion.getName() + " à " + getDateOccurence());
+        Logger.DataSimple("DecollageDetail", "Decollage de l'avion " + avion.getName() + " à " + getDateOccurence());
+        Logger.DataSimple("Decollage",  avion.getName(), getDateOccurence().truncateToHours());
     }
 }

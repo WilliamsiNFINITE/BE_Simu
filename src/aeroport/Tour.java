@@ -32,7 +32,7 @@ public class Tour extends EntiteSimulee {
     //Méthodes
 
     public Boolean AutorisationAccesPiste(Avion avion) {
-        // Attribution d'un numero de vol à l'avion de la forme F + entier aléatoire de 00 à 99
+        // Attribution d'un numero de vol à l'avion de la forme F + entier aléatoire de 000 à 1000
         avion.setName("F" + (int) (Math.random() * 1000));
         // Verifie si la piste est libre pour l'atterrissage
         if (!this.getEngine().getPiste().getOccupe()) {

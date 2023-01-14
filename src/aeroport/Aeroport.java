@@ -1,6 +1,5 @@
 package aeroport;
 
-import engine.*;
 import engine.SimuEngine;
 import enstabretagne.base.logger.Logger;
 import enstabretagne.base.math.MoreRandom;
@@ -11,8 +10,8 @@ public class Aeroport {
     public static void main(String[] args) {
         SimuEngine engine = new SimuEngine();
 
-        LogicalDateTime start = new LogicalDateTime("14/12/2022 07:00");
-        LogicalDateTime end = new LogicalDateTime("14/12/2022 22:00");
+        LogicalDateTime start = new LogicalDateTime("12/12/2022 00:00");
+        LogicalDateTime end = new LogicalDateTime("12/12/2022 22:00");
 
         engine.initSimulation(start, end);
 

@@ -18,6 +18,7 @@ public class Dechargement extends SimEvent {
 
     @Override
     public void process() {
-        Logger.DataSimple("Dechargement", "Dechargement de l'avion " + avion.getName() + " au " + gate.getName() + " à " + getDateOccurence());
+        Logger.DataSimple("DechargementDetail", "Dechargement de l'avion " + avion.getName() + " au " + gate.getName() + " à " + getDateOccurence());
+        Logger.DataSimple("Dechargement", avion.getName(),gate.getName(),getDateOccurence().truncateToHours());
     }
 }

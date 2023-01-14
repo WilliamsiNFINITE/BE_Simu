@@ -76,21 +76,23 @@ public class ScenarioAeroport extends Scenario {
 
     public void atterisagge(int i){
         Avion currentAvion = listAvion.get(i).getAvion();
+        MoreRandom r = new MoreRandom();
         if(currentAvion.DemandeAccesPiste(tour)){
             LogicalDuration date = getNextDate4AvionCreation(this.getEngine().SimulationDate());
-
-            LogicalDateTime testDate = getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 11)));
+            int dureeApproche = r.nextInt(2,5);
+            LogicalDateTime testDate = getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(i * 11 + dureeApproche)));
 
             System.out.println("In Scenario: " + testDate);
             Post(new Atterissage(testDate, currentAvion));
             currentAvion.FinAtterrissage(tour);
 
             if(currentAvion.DemandeRoulage(tour, "Atterrissage")){
-                Post(new Roulement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(2))), currentAvion));
+                int dureeRoulement = r.nextInt(2, 6);
+                Post(new Roulement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(dureeRoulement))), currentAvion));
                 currentAvion.FinRoulage(getEngine().getEnteringTaxiway());
 
                 Gate aGate = getAvailableGate();
-                Post(new Dechargement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(2))), currentAvion, aGate));
+                Post(new Dechargement(getEngine().SimulationDate().add(date.add(LogicalDuration.ofMinutes(10))), currentAvion, aGate));
                 aGate.setOccupe(true);
             }
         }

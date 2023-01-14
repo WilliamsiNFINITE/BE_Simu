@@ -14,6 +14,7 @@ public class Roulement extends SimEvent {
 
     @Override
     public void process() {
-        Logger.DataSimple("Roulement", "Roulement de l'avion " + avion.getName() + " à " + getDateOccurence());
+        Logger.DataSimple("RoulementDetail", "Roulement de l'avion " + avion.getName() + " à " + getDateOccurence());
+        Logger.DataSimple("Roulement", avion.getName(), getDateOccurence().truncateToHours());
     }
 }
