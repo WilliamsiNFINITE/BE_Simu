@@ -20,6 +20,6 @@ public class Atterissage extends SimEvent {
     public void process() {
         //Ici on ne traite que de l'événementiel (pas de traitement pour savoir si l'avion a le droit d'atterrir ou non)
         Logger.DataSimple("AtterissageDetail", "Atterissage de l'avion " + avion.getName() + " à " + getDateOccurence());
-        Logger.DataSimple("Atterissage", avion.getName(),getDateOccurence().truncateToDays());
+        Logger.DataSimple("Atterissage", avion.getName(),getDateOccurence().truncateToHours());
     }
 }
