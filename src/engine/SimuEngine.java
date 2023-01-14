@@ -87,24 +87,6 @@ public class SimuEngine implements ISimulationDateProvider, IScenarioIdProvider{
 		}
 	}
 
-	public boolean simulationStep() {
-		if (echeancier.size() == 0) return false;
-		SimEvent currentEvent = getCurrentEvent();
-		currentDate = currentEvent.getDateOccurence();
-		if (currentDate.compareTo(end) > 0) return false;
-		echeancier.remove(currentEvent);
-		currentEvent.process();
-		System.gc();
-		return true;
-	}
-
-	public SimEvent getCurrentEvent() {
-		return echeancier.first();
-	}
-	public void simulationLoop() {
-		while (simulationStep());
-	}
-
 	//initialisation de la simulation sans param�tres de d�but et fin
 	//Le d�but et fin viennent du sc�nario
 	public void initSimulation() {
