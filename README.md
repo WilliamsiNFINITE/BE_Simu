@@ -1,4 +1,5 @@
 # BE_Simu
-repository du be de simulation
+
+Afin de lancer la simulation, il suffit d'éxecuter le main de la classe Aeroport.java
 
 
