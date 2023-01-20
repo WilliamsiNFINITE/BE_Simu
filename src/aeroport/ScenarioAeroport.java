@@ -78,7 +78,7 @@ public class ScenarioAeroport extends Scenario {
 
             //Détermination de la date d'arrivée du prochain avion
             LogicalDateTime date = getEngine().SimulationDate().add(date4AvionCreation.add(LogicalDuration.ofMinutes(i * 11 + dureeApproche))).add(LogicalDuration.ofDay(iniAirport.getJour()));
-
+            Logger.DataSimple("DebugAtterrissage",date4AvionCreation,   getEngine().SimulationDate().add(date4AvionCreation), date);
             //Atterrissage
             Post(new Atterissage(date, currentAvion));
 
@@ -108,6 +108,7 @@ public class ScenarioAeroport extends Scenario {
         if(currentAvion.DemandeAccesPiste(tour)){
             LogicalDuration date4AvionCreation = getNextDate4AvionCreation(this.getEngine().SimulationDate().add(LogicalDuration.ofDay(iniAirport.getJour())));
             LogicalDateTime date = getEngine().SimulationDate().add(date4AvionCreation.add(LogicalDuration.ofMinutes(i * 10))).add(LogicalDuration.ofDay(iniAirport.getJour()));
+            Logger.DataSimple("DebugDecollage",date4AvionCreation,  getEngine().SimulationDate().add(date4AvionCreation), date);
 
             Post(new Decollage(date, currentAvion));
             currentAvion.FinDecollage(tour);
@@ -134,7 +135,7 @@ public class ScenarioAeroport extends Scenario {
         }
     }
 
-    private Gate getAvailableGate(){
+    public Gate getAvailableGate(){
         for(int i = 0; i < gates.size(); i++) {
             if(!gates.get(i).occupe) return gates.get(i);
         }
@@ -142,7 +143,7 @@ public class ScenarioAeroport extends Scenario {
         return null;
     }
 
-    private Gate getOccupiedGate(){
+    public Gate getOccupiedGate(){
         for(int i = 0; i < gates.size(); i++) {
             // System.out.println(gates.get(i).occupe);
             if(gates.get(i).occupe) return gates.get(i);
@@ -150,7 +151,7 @@ public class ScenarioAeroport extends Scenario {
         return null;
     }
 
-    private double coefficientMeteo() {
+    public double coefficientMeteo() {
         double coefficientMeteo;
         double predictiontMeteo = getRandomGenerator().nextExp(8); //Mauvaise météo 1 jour sur 8
         parametreMeteo += predictiontMeteo;
@@ -197,7 +198,7 @@ public class ScenarioAeroport extends Scenario {
     }
 
 
-    private static class CreerAvion extends SimEvent {
+    static class CreerAvion extends SimEvent {
 
         String name;
         SimuEngine engine;
